@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../Magento/Backend/etc/menu.xsd">
+    <menu>
+        <add id="Lava_FileProcessor::main" title="Lava FileProcessor" module="Lava_FileProcessor" sortOrder="300" dependsOnModule="Lava_FileProcessor" parent="Magento_Backend::system" resource="Lava_FileProcessor::main"/>
+        <add id="Lava_FileProcessor::listing" title="Lava FileProcessor Tasks Listing" module="Lava_FileProcessor" sortOrder="10" parent="Lava_FileProcessor::main" action="fileprocessor/file/" resource="Lava_FileProcessor::listing"/>
+    </menu>
+</config>

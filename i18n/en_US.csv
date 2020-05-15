@@ -1,0 +1,3 @@
+"No file processors registered", "No file processors registered"
+"Specify file processor type", "Specify file processor type"
+"Processor of class '%1' must extends '%2' or '%3'", "Processor of class '%1' must extends '%2' or '%3'"

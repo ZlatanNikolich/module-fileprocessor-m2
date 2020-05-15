@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">lava_fileprocessor_file_edit.lava_fileprocessor_file_edit_data_source</item>
+            <item name="deps" xsi:type="string">lava_fileprocessor_file_edit.lava_fileprocessor_file_edit_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">File Task Form</item>
+        <item name="layout" xsi:type="array">
+            <item name="type" xsi:type="string">tabs</item>
+        </item>
+        <item name="buttons" xsi:type="array">
+            <item name="back" xsi:type="string">Lava\FileProcessor\Block\Adminhtml\File\Edit\BackButton</item>
+            <item name="cancel" xsi:type="string">Lava\FileProcessor\Block\Adminhtml\File\Edit\CancelButton</item>
+            <item name="reset" xsi:type="string">Lava\FileProcessor\Block\Adminhtml\File\Edit\ResetButton</item>
+            <item name="save" xsi:type="string">Lava\FileProcessor\Block\Adminhtml\File\Edit\SaveButton</item>
+        </item>
+    </argument>
+    <dataSource name="lava_fileprocessor_file_edit_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Lava\FileProcessor\Model\File\DataProvider</argument>
+            <argument name="name" xsi:type="string">lava_fileprocessor_file_edit_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">entity_id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="submit_url" xsi:type="url" path="fileprocessor/file/save"/>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+    <fieldset name="lava_fileprocessor_file_edit">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Enter File Data</item>
+            </item>
+        </argument>
+        <field name="entity_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">false</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">lava_fileprocessor_file_edit.lava_fileprocessor_file_edit_data_source.entity_id</item>
+                </item>
+            </argument>
+        </field>
+        <field name="file_location_write">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">File Location (relative file path to the processor/exports path)</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">lava_fileprocessor_file_edit.lava_fileprocessor_file_edit_data_source.file_location</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="validate-unicode" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="file_location_read" formElement="fileUploader">
+            <settings>
+                <!--<notice translate="true">Allowed file types: jpeg, gif, png.</notice>-->
+                <label translate="true">Upload file for Import Task</label>
+                <componentType>fileUploader</componentType>
+            </settings>
+            <formElements>
+                <fileUploader>
+                    <settings>
+                        <!--<allowedExtensions>jpg jpeg gif png</allowedExtensions>-->
+                        <maxFileSize>41943040</maxFileSize>
+                        <uploaderConfig>
+                            <param xsi:type="string" name="url">fileprocessor/file/upload</param>
+                        </uploaderConfig>
+                    </settings>
+                </fileUploader>
+            </formElements>
+        </field>
+        <field name="file_type" formElement="select">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                        <item name="validate-no-empty" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">File type</label>
+                <dataScope>file_type</dataScope>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Lava\FileProcessor\Model\Config\Source\File\Type"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <field name="params">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">File Task Params (as JSON string)</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="formElement" xsi:type="string">textarea</item>
+                    <item name="source" xsi:type="string">lava_fileprocessor_file_edit.lava_fileprocessor_file_edit_data_source.params</item>
+                </item>
+            </argument>
+        </field>
+        <field name="status">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Status</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="disabled" xsi:type="boolean">true</item>
+                    <item name="source" xsi:type="string">lava_fileprocessor_file_edit.lava_fileprocessor_file_edit_data_source.status</item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+</form>

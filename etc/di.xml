@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="lava_fileprocessor_file_listing_data_source" xsi:type="string">Lava\FileProcessor\Model\ResourceModel\File\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Lava\FileProcessor\Model\ResourceModel\File\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">lava_fileprocessor_file</argument>
+            <argument name="resourceModel" xsi:type="string">Lava\FileProcessor\Model\ResourceModel\File</argument>
+        </arguments>
+    </virtualType>
+
+    <preference for="Lava\FileProcessor\Api\FileRepositoryInterface" type="Lava\FileProcessor\Model\FileRepository" />
+    <preference for="Lava\FileProcessor\Api\Data\FileInterface" type="Lava\FileProcessor\Model\File" />
+    <preference for="Lava\FileProcessor\Api\Data\FileSearchResultInterface" type="Lava\FileProcessor\Model\FileSearchResult" />
+    <preference for="Lava\FileProcessor\Api\ProcessorListInterface" type="Lava\FileProcessor\Model\ProcessorList" />
+
+    <!-- Set base temporary and base path via DI at this point. Probably better to make it store-config value/ or not?-->
+    <type name="Lava\FileProcessor\Model\FileUploader">
+        <arguments>
+            <argument name="baseTmpPath" xsi:type="string">processor/imports/tmp</argument>
+            <argument name="basePath" xsi:type="string">processor/imports</argument>
+        </arguments>
+    </type>
+</config>
